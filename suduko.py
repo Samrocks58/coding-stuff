@@ -181,16 +181,5 @@ if original_score == 9:
 else:
     print(f"originality socre is: {original_score}.")
     print(f"# of Changes: {changes}")
-#9 8 3 ? 2 4 7 1 6
-#9 8 7 6 5 4 3 2 1
-# 1 2 3 4 5 6 7 8 9
 
-#? 6 ? ? 8 ? 9 ? 5
-#? 7 4 1 ? ? ? 6 ?
-#2 ? ? 6 5 3 ? 4 ?
-#6 ? ? 2 ? 1 5 ? ?
-#3 ? 9 ? 7 4 ? ? 2
-#? ? 1 5 ? ? 8 ? 3
-#8 ? ? 9 2 ? ? ? 7
-#? 3 ? ? ? ? 1 5 ?
-#7 4 ? 3 ? 6 2 ? 9
+#I want to see if this bottom bit changes.........
