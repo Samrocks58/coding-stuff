@@ -1,0 +1,72 @@
+
+Left joystick:
+    up is -1
+    down is 1
+    right is 1
+    left is -1
+
+Trigger:
+    right trigger is -1
+    left trigger is 1
+
+
+Right Joystick:
+    up on the right joystick is -1
+    down on the right joystick is 1
+    right on the right joystick is 1
+    left on the right joystick is -1
+
+Button Presses:
+
+A is 0
+B is 1
+X is 2
+Y is 3
+Left Bumper is 4
+Right Bumper is 5
+
+UP IS 273
+
+KEYBOARD SHIT:
+
+    keys=pygame.key.get_pressed()
+    pygame.key.set_repeat(True)
+    pygame.key.set_repeat(1, 1)
+    def funct():
+        pygame.key.set_repeat(1, 1)
+        for event in pygame.event.get():
+            if event == pygame.KEYDOWN:
+                    return True
+            elif event == pygame.KEYUP:
+                return False 
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            quit()
+        keys=pygame.key.get_pressed()
+        if i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_LEFT:
+                #while funct() == True:
+                    MoveX -= int(speed)
+        if i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_RIGHT:
+                #while funct() == True:
+                    MoveX += int(speed)
+        if i.type == pygame.KEYDOWN:
+            #if i.key == pygame.K_UP:
+                #while funct() == True:
+            if keys[276]:
+                MoveY -= int(speed)
+        if i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_DOWN:
+                #while funct() == True:
+                    MoveY += int(speed)
+            if i.key == pygame.K_q:
+                quit()
+           # if i.key == pygame.K_RIGHT:
+           #     MoveX += speed
+           # if i.key == pygame.K_UP:
+           #     MoveY -= speed
+           # if i.key == pygame.K_DOWN:
+           #     MoveY += speed
+           # if i.key == pygame.K_LEFT:
+               # MoveX -= speed
