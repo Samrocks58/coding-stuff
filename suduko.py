@@ -1,3 +1,6 @@
+from typing import ValuesView
+
+
 rows=[]
 original_rows=[]
 columns=[]
@@ -16,10 +19,6 @@ for x in range(9):
     for i in rows:
         colum.append(i[x])
     columns.append(colum)
-for i in rows:
-    print(i)
-for i in columns:
-    print(i)
 blocks=[]
 for x in [0, 3, 6]:
     block=[]
@@ -35,7 +34,6 @@ for x in [0, 3, 6]:
         block.extend(i[6:9])
     blocks.append(block)
     block=[]
-print(blocks)
 block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
 block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
 numbers="123456789"
@@ -58,9 +56,6 @@ def update_blocks():
         for i in rows[x:x+3]:
             block.extend(i[:3])
         blocks.append(block)
-        if len(block) != 9:
-            print(f"Oh no. Block is {block}.")
-            print(f"rows are {rows[x:x+3]}")
         block=[]
         for i in rows[x:x+3]:
             block.extend(i[3:6])
@@ -98,7 +93,7 @@ def row_solve(number):
                 rows[b][(find_missing(not_number, int_indexes)[0])] = number
                 columns[(find_missing(not_number, int_indexes)[0])][b] = number
 def colum_solve(number):
-    global rows, columns, changes
+    global rows, columns, changes, block_columns, block_rows
     number=str(number)
     for colum in columns:
         colum_index=columns.index(colum)
@@ -114,12 +109,12 @@ def colum_solve(number):
                 if not_number.count(z) > 1:
                     for i in range(not_number.count(z)-1):
                         not_number.remove(z)
-            print(len(not_number))
-            print(f"type of find missing: {find_missing(not_number, int_indexes)}")
             if len(not_number) == 8:
                     if len(find_missing(not_number, int_indexes)) == 1:
                         columns[colum_index][find_missing(not_number, int_indexes)[0]] = number
                         rows[(find_missing(not_number, int_indexes)[0])][colum_index] = number
+                        block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
+                        block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
                         # changes += 1
 def block_logic(blocknumber, number):
     update_blocks()
@@ -136,33 +131,38 @@ def block_logic(blocknumber, number):
                     not_number.append(i)
                 elif block[i] == "?":
                     empty_space.append(i)
-    for space in empty_space:
-        space_row=selected_rows[space//3]
-        space_column=selected_columns[space%3]
-        if number in space_row:
-            not_number.append(space)
-            if space in empty_space:
-                empty_space.remove(space)
-        if number in space_column:
-            not_number.append(space)
-            if space in empty_space:
-                empty_space.remove(space)
-    print(blocks[0])
-    if len(not_number) == 8:
-        if len(empty_space) == 1:
-            blocks[blocknumber][find_missing(not_number, int_indexes)[0]] = number
-            rows[rows.index(selected_rows[int(empty_space[0])//3])] = number
-            columns[columns.index(selected_columns[int(empty_space[0])%3])] = number
-            changes += 1
+            for space in empty_space:
+                space_row=selected_rows[space//3]
+                space_column=selected_columns[space%3]
+                if number in space_row:
+                    not_number.append(space)
+                    if space in empty_space:
+                        empty_space.remove(space)
+                if number in space_column:
+                    not_number.append(space)
+                    if space in empty_space:
+                        empty_space.remove(space)
+            if len(not_number) == 8:
+                if len(empty_space) == 1:
+                    print("it's called.")
+                    c_index=columns.index(selected_columns[int(empty_space[0])%3])
+                    r_index=rows.index(selected_rows[int(empty_space[0])//3])
+                    #God I fucking hope this works.......
+                    blocks[blocknumber][find_missing(not_number, int_indexes)[0]] = number
+                    rows[r_index][c_index] = number
+                    columns[c_index][r_index] = number
+                    block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
+                    block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
+                    changes += 1
 
 
-print(find_missing(rows[0], numbers))
 print("\n"*20)
 for z in range(9):
     # for i in numbers:
     #     row_solve(i)
     for i in numbers:
         colum_solve(i)
+    update_blocks()
     for i in numbers:
         block_logic(z, i)
 for i in rows:
