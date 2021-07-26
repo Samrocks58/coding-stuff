@@ -1,6 +1,3 @@
-from typing import ValuesView
-
-
 rows=[]
 original_rows=[]
 columns=[]
