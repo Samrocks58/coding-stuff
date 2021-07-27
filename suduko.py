@@ -143,7 +143,20 @@ def block_logic(blocknumber, number):
                 if len(empty_space) == 1:
                     print("it's called.")
                     c_index=columns.index(selected_columns[int(empty_space[0])%3])
-                    r_index=rows.index(selected_rows[int(empty_space[0])//3])
+                    try:
+                        r_index=rows.index(selected_rows[int(empty_space[0])//3])
+                    except ValueError:
+                        print("Rows:")
+                        for r in rows:
+                            print(r)
+                        print("Columns:")
+                        for a in range(9):
+                            column=[]
+                            for c in columns:
+                                column.append(c[a])
+                            print(column)
+                        print(block_rows["0"])
+                        quit()
                     #God I fucking hope this works.......
                     blocks[blocknumber][find_missing(not_number, int_indexes)[0]] = number
                     rows[r_index][c_index] = number
