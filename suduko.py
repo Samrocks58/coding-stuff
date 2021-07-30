@@ -2,7 +2,16 @@ rows=[]
 original_rows=[]
 columns=[]
 changes=0
-test_data=r"non-program bulcrapo/test_data.txt"
+numbers="123456789"
+indexes="012345678"
+int_indexes=[int(i) for i in "012345678"]
+selected_file=input("What file do you want me to solve: ")
+if selected_file[-4:] != ".txt":
+    selected_file = selected_file + ".txt"
+selected_file= r"non-program bulcrapo/" + selected_file
+test_data=selected_file
+# test_data=r"non-program bulcrapo/test_data.txt"
+# solved_test_data=r"non-program bulcrapo/solved_test_data.txt"
 with open(test_data, 'r') as file:
     test_data=file.readlines()
 for i in test_data:
@@ -33,9 +42,7 @@ for x in [0, 3, 6]:
     block=[]
 block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
 block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
-numbers="123456789"
-indexes="012345678"
-int_indexes=[int(i) for i in "012345678"]
+
 def update_rows():
     global columns, rows
     rows=[]
@@ -44,6 +51,7 @@ def update_rows():
         for c in columns:
             row.append(c[i])
         rows.append(row)
+
 def update_blocks():
     update_rows()
     global rows, blocks
@@ -62,6 +70,7 @@ def update_blocks():
             block.extend(i[6:9])
         blocks.append(block)
         block=[]
+
 def find_missing(array, numberslist):
     numbers=[i for i in numberslist]
     missing=[]
@@ -69,26 +78,32 @@ def find_missing(array, numberslist):
         if array.count(i) == 0:
             missing.append(i)
     return missing
+
 def row_solve(number):
-    global rows, columns
+    global rows, columns, changes, block_columns, block_rows
     number=str(number)
     for r in rows:
-        if r.count(number) == 0:
-#find_missing(r, numbers).count(number) != 0
+        row_index=rows.index(r)
+        if not number in r:
             not_number=[]
             for b in range(len(r)):
                 if r[b] !="?":
-                    not_number.append(r.index(r[b]))
+                    not_number.append(b)
                 elif r[b] == "?":
-                    if columns[r.index(r[b])].count(number) != 0:
-                        not_number.append(r.index(r[b]))
+                    if columns[b].count(number) != 0:
+                        not_number.append(b)
             for z in not_number:
                 if not_number.count(z) > 1:
                     for i in range(not_number.count(z)-1):
                         not_number.remove(z)
             if len(not_number) == 8:
-                rows[b][(find_missing(not_number, int_indexes)[0])] = number
-                columns[(find_missing(not_number, int_indexes)[0])][b] = number
+                if len(find_missing(not_number, int_indexes)) == 1:
+                    rows[row_index][(find_missing(not_number, int_indexes)[0])] = number
+                    columns[(find_missing(not_number, int_indexes)[0])][row_index] = number
+                    block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
+                    block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
+                    changes += 1
+
 def colum_solve(number):
     global rows, columns, changes, block_columns, block_rows
     number=str(number)
@@ -112,14 +127,16 @@ def colum_solve(number):
                         rows[(find_missing(not_number, int_indexes)[0])][colum_index] = number
                         block_rows={"0": rows[:3], "1": rows[3:6], "2": rows[6:9]}
                         block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
-                        # changes += 1
-def block_logic(blocknumber, number):
+                        changes += 1
+
+def block_logic(number):
     update_blocks()
-    global blocks, block_rows, block_columns, rows, columns, changes
+    global blocks, block_rows, block_columns, rows, columns, changes, selected_rows, selected_columns
     number=str(number)
-    selected_rows=block_rows[str(blocknumber//3)]
-    selected_columns=block_columns[str(blocknumber%3)]
     for block in blocks:
+        blocknumber=blocks.index(block)
+        selected_rows=block_rows[str(blocknumber//3)]
+        selected_columns=block_columns[str(blocknumber%3)]
         if not number in block:
             not_number=[]
             empty_space=[]
@@ -141,23 +158,9 @@ def block_logic(blocknumber, number):
                         empty_space.remove(space)
             if len(not_number) == 8:
                 if len(empty_space) == 1:
-                    print("it's called.")
-                    c_index=columns.index(selected_columns[int(empty_space[0])%3])
-                    try:
-                        r_index=rows.index(selected_rows[int(empty_space[0])//3])
-                    except ValueError:
-                        print("Rows:")
-                        for r in rows:
-                            print(r)
-                        print("Columns:")
-                        for a in range(9):
-                            column=[]
-                            for c in columns:
-                                column.append(c[a])
-                            print(column)
-                        print(block_rows["0"])
-                        quit()
                     #God I fucking hope this works.......
+                    c_index=columns.index(selected_columns[int(empty_space[0])%3])
+                    r_index=rows.index(selected_rows[int(empty_space[0])//3])
                     blocks[blocknumber][find_missing(not_number, int_indexes)[0]] = number
                     rows[r_index][c_index] = number
                     columns[c_index][r_index] = number
@@ -165,16 +168,38 @@ def block_logic(blocknumber, number):
                     block_columns={"0": columns[:3], "1": columns[3:6], "2": columns[6:9]}
                     changes += 1
 
+def checkIfRight(solved_data):
+    global rows
+    with open(solved_data, 'r') as endfile:
+        solved_board=endfile.readlines()
+        solved_rows=[]
+        for i in solved_board:
+            i = i.split("\n")[0]
+            solved_rows.append(i.split())
+        if solved_rows == rows:
+            print("it's correct")
+        else:
+            print("something's wrong.......")
+
 
 print("\n"*20)
-for z in range(9):
-    # for i in numbers:
-    #     row_solve(i)
+Done=True
+for row in rows:
+    if "?" in row:
+        Done=False
+# while not Done:
+for i in range(100):
+    for i in numbers:
+        row_solve(i)
     for i in numbers:
         colum_solve(i)
     update_blocks()
     for i in numbers:
-        block_logic(z, i)
+        block_logic(i)
+    Done=True
+    for row in rows:
+        if "?" in row:
+            Done=False
 for i in rows:
     print_row=""
     for n in i:
@@ -192,4 +217,4 @@ else:
     print(f"originality socre is: {original_score}.")
     print(f"# of Changes: {changes}")
 
-#I want to see if this bottom bit changes.........
+# checkIfRight(solved_test_data)
