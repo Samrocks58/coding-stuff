@@ -29,23 +29,23 @@ password=sign_in2.find_element_by_class_name("form-field required undefined pass
 # Account.click()
 # Sign_in=browser.find_element_by_xpath("/html/body/div[1]/div/div/div[1]/section/div[3]/div[2]/div/div/div[2]/div/a[1]/div/span").click()
 # time.sleep(random.randint(3, 8))
-# email_signIn=browser.find_element_by_xpath(email_xpath).send_keys("htpearce94@gmail.com")
+# email_signIn=browser.find_element_by_xpath(email_xpath).send_keys("")
 # time.sleep(random.randint(3, 5))
-# password_signIn=browser.find_element_by_xpath(password_xpath).send_keys("Happy2323" + Keys.RETURN)
+# password_signIn=browser.find_element_by_xpath(password_xpath).send_keys("" + Keys.RETURN)
 # time.sleep(random.randint(3, 8))
 # Search_Bar=browser.find_element_by_xpath("/html/body/div[1]/div/div/div[1]/section/div[2]/div/div[3]/div[2]/div/form/input[2]").send_keys("clock" + Keys.RETURN)
 # time.sleep(random.randint(3, 8))
 discord=[]
 time.sleep(5)
 # while True:
-    # message=input("What do you want to text peter? ")
+    # message=input("What do you want to text? ")
     # if message == "quit":
         # break
     # else:
         # discord.append(message)
 time.sleep(2)
-browser.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div/div/form/div/div/div[1]/div[3]/div[1]/div/div[2]/input").send_keys("smprc58@gmail.com")
-browser.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div/div/form/div/div/div[1]/div[3]/div[2]/div/input").send_keys("Spear5858" + Keys.RETURN)
+# browser.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div/div/form/div/div/div[1]/div[3]/div[1]/div/div[2]/input").send_keys("")
+# browser.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div/div/form/div/div/div[1]/div[3]/div[2]/div/input").send_keys("" + Keys.RETURN)
 time.sleep(15)
 browser.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div/div/div/div/div[1]/nav/div[2]/div/a[3]/div/div[2]/div[1]/div/div").click()
 time.sleep(20)
