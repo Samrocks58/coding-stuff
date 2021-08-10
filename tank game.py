@@ -1,7 +1,8 @@
 import pygame
+from pygame.display import init as start
 
 pygame.init()
-pygame.display.init()
+start()
 
 width=int(1200)
 height=int(600)
@@ -15,11 +16,11 @@ screen.fill(white)
 
 while True:
     screen.fill(white)
-    pygame.display.init()
-
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 quit()
+    pygame.display.flip()
