@@ -14,9 +14,10 @@ Black=(0, 0, 0)
 screen = pygame.display.set_mode((width, height))#, depth=0, flags=pygame.FULLSCREEN)
 screen.fill(white)
 
+tank=pygame.image.load(r'non-program bulcrapo/cool_tank.png')
 while True:
     screen.fill(white)
-    
+    screen.blit(tank, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
