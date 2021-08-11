@@ -14,7 +14,7 @@ Black=(0, 0, 0)
 
 screen = pygame.display.set_mode((width, height))#, depth=0, flags=pygame.FULLSCREEN)
 screen.fill(white)
-Font=pygame.font.Font(r'C:\Users\spear\OneDrive\Desktop\Desktop Folder\gibster-font\Gibster-ow1XA.otf', 100)
+Font=pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 100)
 
 total_width=48
 total_height=24
@@ -172,7 +172,7 @@ counter=counterClass()
 class object:
     def __init__(self):
         self.cord=self.random_pos()# Center: [24, 12]
-        self.image=pygame.image.load(r"C:\Users\spear\OneDrive\Desktop\Desktop Folder\coins.png")
+        self.image=pygame.image.load(r"C:\Users\smprc\AppData\Local\Programs\Microsoft VS Code\coding files\my programs\non-program bulcrapo\coin.png")
         self.scaled_image=pygame.transform.scale(self.image, (25, 25))
         global object_cord
         object_cord = self.cord
