@@ -38,23 +38,23 @@ while True:
             if event.key == pygame.K_q:
                 quit()
             if event.key == pygame.K_LEFT:
+                opponent_tank=tank
                 playerX -= 20
                 new_angle=round(math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
-                degrees_turning=current_degrees-new_angle
-                opponent_tank=pygame.transform.rotate(opponent_tank, degrees_turning)
+                opponent_tank=pygame.transform.rotate(opponent_tank, new_angle)
             if event.key == pygame.K_RIGHT:
+                opponent_tank=tank
                 playerX += 20
                 new_angle=round(math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
-                degrees_turning=current_degrees-new_angle
-                opponent_tank=pygame.transform.rotate(opponent_tank, degrees_turning)
+                opponent_tank=pygame.transform.rotate(opponent_tank, new_angle)
             if event.key == pygame.K_UP:
+                opponent_tank=tank
                 playerY -= 20
                 new_angle=round(math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
-                degrees_turning=current_degrees-new_angle
-                opponent_tank=pygame.transform.rotate(opponent_tank, degrees_turning)
+                opponent_tank=pygame.transform.rotate(opponent_tank, new_angle)
             if event.key == pygame.K_DOWN:
+                opponent_tank=tank
                 playerY += 20
                 new_angle=round(math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
-                degrees_turning=current_degrees-new_angle
-                opponent_tank=pygame.transform.rotate(opponent_tank, degrees_turning)
+                opponent_tank=pygame.transform.rotate(opponent_tank, new_angle)
     pygame.display.flip()
