@@ -24,11 +24,16 @@ opponent_tank=tank
 opponentX=0
 opponentY=0
 current_degrees=0
-opponent_tank=pygame.transform.rotate(opponent_tank, math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
-current_degrees=math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90
+# opponent_tank=pygame.transform.rotate(opponent_tank, math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90)
+# current_degrees=math.degrees(math.atan(abs(opponentX-playerX)/abs(opponentY-playerY)))-90
 
 while True:
     screen.fill(white)
+
+    shooty_boy=pygame.Surface((20, 6))
+    shooty_boy.fill(Red)
+    shooty_boy=pygame.transform.rotate(shooty_boy, current_degrees)
+    screen.blit(shooty_boy, (247, 113))
     screen.blit(tank, (playerX, playerY))
     screen.blit(opponent_tank, (opponentX, opponentY))
     for event in pygame.event.get():
