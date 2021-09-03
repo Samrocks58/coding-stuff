@@ -26,7 +26,7 @@ class snake:
         self.direction=direction
         self.cord = coord
         self.id=id
-        self.queue=queue.LifoQueue()
+        self.queue=[]
         global cord
         cord=self.cord
         if self.id == 1:
@@ -42,7 +42,7 @@ class snake:
             snake1bool=True
         else:
             snake1bool=False
-        self.queue.put(self.direction)
+        self.queue.append(self.direction)
         if self.direction == "right":
             if cord[0] >= total_width-1:
                 if snake1bool:
@@ -128,8 +128,10 @@ class snake:
     #variableName = ['stuff', 'things', 'stuffs', 'thingmaybe', 'objects', 'nameLater', 'thinkOfBetterNameLater', 'pog','pogchamp', 'absloutePoggers']
 
     def follow(self, front_snake, snake_number):
-        if front_snake.queue.qsize() > snake_number:
-            new_direction=front_snake.queue.get()
+        if len(front_snake.queue) > snake_number:
+            new_direction=front_snake.queue[-1]
+            del front_snake.queue[-1]
+            # new_direction=front_snake.queue.get()
             if self.change_direction(new_direction):
                 return True
 
