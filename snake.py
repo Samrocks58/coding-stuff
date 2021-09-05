@@ -1,4 +1,4 @@
-import pygame, time, threading, queue, random
+import pygame, time, random
 import tkinter as tk
 from tkinter import messagebox as mb, ttk, Tk
 
