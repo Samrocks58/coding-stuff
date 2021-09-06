@@ -30,12 +30,15 @@ current_degrees=0
 while True:
     screen.fill(white)
 
-    shooty_boy=pygame.Surface((20, 6))
-    shooty_boy.fill(Red)
+    shooty_boy=pygame.Surface((100, 6))
+    # opponent_tank.blit(shooty_boy, (247, 113))
+    shooty_point=opponent_tank.get_rect().midright
+    opponent_tank.blit(shooty_boy, (shooty_point))
     shooty_boy=pygame.transform.rotate(shooty_boy, current_degrees)
-    screen.blit(shooty_boy, (247, 113))
+    shooty_boy.fill((255, 0, 0))
     screen.blit(tank, (playerX, playerY))
     screen.blit(opponent_tank, (opponentX, opponentY))
+    pygame.draw.circle(screen, Red, (shooty_point), 5)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
