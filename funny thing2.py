@@ -3,10 +3,11 @@ import os, time, pygame
 white=(255, 255, 255)
 black=(0, 0, 0)
 pygame.init()
-Font=pygame.font.Font(r'C:\Users\spear\OneDrive\Desktop\Desktop Folder\gibster-font\Gibster-ow1XA.otf', 100)
+Font=pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 100)
 weird=r"non-program bulcrapo/abnormal.txt"
 screen=pygame.display.set_mode((1200, 675))
 screen.fill(white)
+pygame.display.flip()
 
 # Get .txt files
 with open(weird, 'r') as f:
@@ -23,8 +24,10 @@ with open(weird, 'r') as f:
         txt = Font.render(text, False, black)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print(data)
                 quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    quit()
         time.sleep(1)
         screen.fill(white)
         screen.blit(txt, (300, int(675/2)))
@@ -33,3 +36,6 @@ with open(weird, 'r') as f:
 for event in pygame.event.get():
     if event.type == pygame.QUIT:
         quit()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_q:
+            quit()
