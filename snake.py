@@ -5,8 +5,8 @@ from tkinter import messagebox as mb, ttk, Tk
 pygame.display.init()
 pygame.font.init()
 
-width=int(1200)
-height=int(600)
+width=int(25*25)
+height=int(20*25)
 Orange=(255, 95, 0)
 white=(255, 255, 255)
 Red=(255, 0, 0)
@@ -16,8 +16,8 @@ screen = pygame.display.set_mode((width, height))#, depth=0, flags=pygame.FULLSC
 screen.fill(white)
 Font=pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 100)
 
-total_width=48
-total_height=24
+total_width=width/25
+total_height=height/25
 
 stopgame=False
 
@@ -153,12 +153,12 @@ class snake:
         #self.cord
 
 
-snakes={"snake1":snake("right", [24, 12], 1), "snake2":snake("right", [23, 12], 2), "snake3":snake("right", [22, 12], 3), "snake4":snake("right", [21, 12], 4), "snake5":snake("right", [20, 12], 5)}
-snake1 = snake("right", [24, 12], 1)
-snake2 = snake("right", [23, 12], 2)
-snake3 = snake("right", [22, 12], 3)
-snake4 = snake("right", [21, 12], 4)
-snake5 = snake("right", [20, 12], 5)
+snakes={"snake1":snake("right", [total_width//2, total_height//2], 1), "snake2":snake("right", [total_width//2-1, total_height//2], 2), "snake3":snake("right", [total_width//2-2, total_height//2], 3), "snake4":snake("right", [total_width//2-3, total_height//2], 4), "snake5":snake("right", [total_width//2-4, total_height//2], 5)}
+snake1 = snake("right", [total_width//2, total_height//2], 1)
+snake2 = snake("right", [total_width//2-1, total_height//2], 2)
+snake3 = snake("right", [total_width//2-2, total_height//2], 3)
+snake4 = snake("right", [total_width//2-3, total_height//2], 4)
+snake5 = snake("right", [total_width//2-4, total_height//2], 5)
 blocklist=[snake1, snake2, snake3, snake4, snake5]
 target_list=[]
 
@@ -182,7 +182,7 @@ class object:
         global snakes, snake1_cord
         pos_done=False
         while not pos_done:
-            rand_pos=[random.randint(1, 47), random.randint(1, 23)]
+            rand_pos=[random.randint(1, total_width-1), random.randint(1, total_height-1)]
             for snake_string in snakes:
                 if snakes[snake_string].cord != rand_pos:
                     keys=list(snakes.keys())
@@ -215,12 +215,12 @@ def restart():
     global snakes, snake1, snake2, snake3, snake4, snake5, counter, target_list, blocklist, restartbool, screen, rectlist, stopgame
     restartbool=True
     stopgame=False
-    snakes={"snake1":snake("right", [24, 12], 1), "snake2":snake("right", [23, 12], 2), "snake3":snake("right", [22, 12], 3), "snake4":snake("right", [21, 12], 4), "snake5":snake("right", [20, 12], 5)}
-    snake1 = snake("right", [24, 12], 1)
-    snake2 = snake("right", [23, 12], 2)
-    snake3 = snake("right", [22, 12], 3)
-    snake4 = snake("right", [21, 12], 4)
-    snake5 = snake("right", [20, 12], 5)
+    snakes={"snake1":snake("right", [total_width//2, total_height//2], 1), "snake2":snake("right", [total_width//2-1, total_height//2], 2), "snake3":snake("right", [total_width//2-2, total_height//2], 3), "snake4":snake("right", [total_width//2-3, total_height//2], 4), "snake5":snake("right", [total_width//2-4, total_height//2], 5)}
+    snake1 = snake("right", [total_width//2, total_height//2], 1)
+    snake2 = snake("right", [total_width//2-1, total_height//2], 2)
+    snake3 = snake("right", [total_width//2-2, total_height//2], 3)
+    snake4 = snake("right", [total_width//2-3, total_height//2], 4)
+    snake5 = snake("right", [total_width//2-4, total_height//2], 5)
     blocklist=[snake1, snake2, snake3, snake4, snake5]
     target_list=[]
     del counter
