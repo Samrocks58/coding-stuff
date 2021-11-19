@@ -12,9 +12,9 @@ Red=(255, 0, 0)
 White=(255, 255, 255)
 Black=(0, 0, 0)
 
-Fent = pygame.font.Font(r'C:\Users\spear\OneDrive\Desktop\Desktop Folder\gibster-font\Gibster-ow1XA.otf', 200)
+Fent = pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 200)
 
-Font2 = pygame.font.Font(r'C:\Users\spear\OneDrive\Desktop\Desktop Folder\gibster-font\Gibster-ow1XA.otf', 200)
+Font2 = pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 200)
 Font2.set_underline(True)
 Font2.set_bold(False)
 
@@ -44,7 +44,7 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if buddy.collidepoint(mouseX, mouseY) == 1:
                     if clicks:
-                        end_time=time.clock()
+                        end_time=time.perf_counter()
                         text = Fent.render(str(round(60 / (end_time-start_time))), False, Black)
                         screen.fill(White)
                         pygame.draw.polygon(screen, Red, [(270, 461), (358, 490), (266, 539)])
@@ -53,7 +53,7 @@ while True:
                         screen.blit(text2, (150, 25))
                         screen.blit(text, (100, (int(height/2))-75))
                         #print(round(60 / (end_time-start_time)))
-                    start_time=time.clock()
+                    start_time=time.perf_counter()
                     mousedown=True
                     clicks=True
         if mousedown:
