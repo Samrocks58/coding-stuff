@@ -1,4 +1,4 @@
-import pygame, time, random
+import pygame, time
 from level import level_select
 
 
