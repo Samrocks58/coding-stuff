@@ -6,7 +6,7 @@ def level_select():
     max_height=600
     screen=pygame.display.set_mode((max_width, max_height))
     pygame.font.init()
-    levelfont=pygame.font.Font(r"non-program bulcrapo\zig.ttf", 40)
+    levelfont=pygame.font.Font(r"C:\Users\smprc\OneDrive\Desktop\sharingcodebetweencomputers\\zig.ttf", 40)
     levelrects={}
 
     while True:
