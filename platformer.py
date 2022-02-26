@@ -1,4 +1,4 @@
-import pygame, time
+import pygame, time, os
 
 pygame.init()
 pygame.display.init()
@@ -29,7 +29,8 @@ topSpeed = False
 
 while True:
     endTime = time.perf_counter()
-    time.sleep(1/60 - (endTime - startTime))
+    if 1/60 - (endTime - startTime) > 0:
+        time.sleep(1/60 - (endTime - startTime))
     startTime=time.perf_counter()
 
     pygame.display.flip()
@@ -37,28 +38,35 @@ while True:
 
     pygame.draw.rect(screen, brown, (0, max_height-35, max_width, 35))
     pygame.draw.rect(screen, green, (0, max_height-50, max_width, 15))
-    pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
+    if not topSpeed:
+        pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
+    elif topSpeed:
+        pygame.draw.rect(screen, (255, 0, 0), (MoveX, max_height-MoveY, 20, 50))
+
 
     keys = list(pygame.key.get_pressed())
     if keys[Right]:
-        if forceX < 10:
-            forceX += 1
-        if abs(forceX) == 10:
+        if forceX < 15:
+            forceX += 0.5
+        if abs(forceX) >= 15:
             topSpeed = True
-        elif abs(forceX) < 10:
+        elif abs(forceX) < 15:
             topSpeed = False
     if keys[Left]:
-        if forceX > -10:
-            forceX -= 1
-        if abs(forceX) == 10:
+        if forceX > -15:
+            forceX -= 0.5
+        if abs(forceX) >= 15:
             topSpeed = True
-        elif abs(forceX) < 10:
+        elif abs(forceX) < 15:
             topSpeed = False
-    # if keys[Up]:
-    #     # if OnGround:
-    #         if forceY < 10:
-    #             forceY += 1
-    #     # OnGround = False
+    if keys[Up]:
+        if OnGround:
+            if forceY < 10:
+                forceY += 1
+    if keys[Down]:
+        if not OnGround:
+            if forceY > 0:
+                forceY -= 1
 
     MoveX += forceX
     MoveY += forceY
@@ -66,9 +74,20 @@ while True:
     if MoveY > 100:
         forceY -= 0.5
         OnGround=False
-    elif MoveY == 100:
+    elif MoveY <= 100:
         OnGround = True
-        forceY=0
+        forceY *= -1
+        if keys[Down]:
+            forceY = 0
+    if (MoveX > max_width-20) or (MoveX < 0):
+        forceX *= -1
+
+    # print("Force X: {}".format(forceX))
+    print("Force Y: {}".format(forceY))
+    # print("OnGround: {}".format(OnGround))
+    # print("MoveX: {}".format(MoveX))
+    print("MoveY: {}".format(MoveY))
+    os.system('cls')
 
     if OnGround:
         if not topSpeed:
