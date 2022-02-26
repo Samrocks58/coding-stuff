@@ -82,12 +82,13 @@ while True:
     if (MoveX > max_width-20) or (MoveX < 0):
         forceX *= -1
 
+    # Debug:
     # print("Force X: {}".format(forceX))
-    print("Force Y: {}".format(forceY))
+    # print("Force Y: {}".format(forceY))
     # print("OnGround: {}".format(OnGround))
     # print("MoveX: {}".format(MoveX))
-    print("MoveY: {}".format(MoveY))
-    os.system('cls')
+    # print("MoveY: {}".format(MoveY))
+    # os.system('cls')
 
     if OnGround:
         if not topSpeed:
