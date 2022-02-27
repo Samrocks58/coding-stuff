@@ -38,10 +38,11 @@ while True:
 
     pygame.draw.rect(screen, brown, (0, max_height-35, max_width, 35))
     pygame.draw.rect(screen, green, (0, max_height-50, max_width, 15))
+    bouncey = pygame.draw.rect(screen, (255, 0, 0), (max_width-240, max_height-65, 40, 65))
     if not topSpeed:
-        pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
+        player = pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
     elif topSpeed:
-        pygame.draw.rect(screen, (255, 0, 0), (MoveX, max_height-MoveY, 20, 50))
+        player = pygame.draw.rect(screen, (255, 255, 0), (MoveX, max_height-MoveY, 20, 50))
 
 
     keys = list(pygame.key.get_pressed())
@@ -76,12 +77,17 @@ while True:
         OnGround=False
     elif MoveY <= 100:
         OnGround = True
-        forceY *= -1
-        if keys[Down]:
-            forceY = 0
+        forceY = 0
     if (MoveX > max_width-20) or (MoveX < 0):
         forceX *= -1
-
+    if player.colliderect(bouncey):
+        if (player.left < bouncey.left) and (MoveX < bouncey.centerx):
+            MoveX -= abs(player.right - bouncey.left)
+            forceX=0
+        if (player.right > bouncey.right) and (MoveX > bouncey.centerx):
+            MoveX += abs(bouncey.right - player.left)
+            forceX=0
+        
     # Debug:
     # print("Force X: {}".format(forceX))
     # print("Force Y: {}".format(forceY))
