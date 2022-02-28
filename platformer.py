@@ -1,4 +1,3 @@
-from re import T
 import pygame, time, os
 
 pygame.init()
