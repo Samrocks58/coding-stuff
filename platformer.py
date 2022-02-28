@@ -1,3 +1,4 @@
+from re import T
 import pygame, time, os
 
 pygame.init()
@@ -81,12 +82,17 @@ while True:
     if (MoveX > max_width-20) or (MoveX < 0):
         forceX *= -1
     if player.colliderect(bouncey):
-        if (player.left < bouncey.left) and (MoveX < bouncey.centerx):
-            MoveX -= abs(player.right - bouncey.left)
-            forceX=0
-        if (player.right > bouncey.right) and (MoveX > bouncey.centerx):
-            MoveX += abs(bouncey.right - player.left)
-            forceX=0
+        if OnGround:
+            if (player.left < bouncey.left) and (MoveX < bouncey.centerx):
+                MoveX -= abs(player.right - bouncey.left)
+                forceX=0
+            if (player.right > bouncey.right) and (player.right > bouncey.centerx):
+                MoveX += abs(bouncey.right - player.left)
+                forceX=0
+        else:
+            if (player.bottom > bouncey.top):
+                MoveY = max(115, MoveY)
+                forceY=0
         
     # Debug:
     # print("Force X: {}".format(forceX))
