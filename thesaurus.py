@@ -79,24 +79,6 @@ while not (word == 'quit' or word == 'q'):
             elif partsOspeech[n] == 'adj.':
                 print(f"{n+1}. adjective: {defs[n]}")
         def_choice = int(input('Enter a number here: '))
-        # new_word = defs[def_choice-1]
-        # seperators=["or", ",", ";"]
-        # for s in seperators:
-        #     if s in defs[def_choice-1]:
-        #         new_word = defs[def_choice-1].split(s)
-        #         if len(new_word[1].split()) < 2:
-        #             new_word = new_word[1]
-        #         elif len(new_word[0].split()) < 2:
-        #             new_word = new_word[0]
-        #         else:
-        #             if partsOspeech[def_choice-1] != "verb":
-        #                 new_word = new_word[1]
-        #             else:
-        #                 new_word = new_word[0]
-        # print(new_word)
-        # print(find_synonyms(new_word))
-
-        # print(find_synonyms(word))
         print(find_other_definitions(word, def_choice))
 
     word = input("Enter a new word that you want synonyms of: ")
