@@ -46,12 +46,8 @@ def gameloop():
                     if colorNum == '4':
                             Rcolor = (0, 0, 255)
                     rectlist.append(pygame.draw.rect(screen, Rcolor, k))
-            # rectlist.append(r1)
-            # rectlist.append(r2)
         if screen2:
             if screenNum == 1:
-                # r1 = pygame.draw.rect(screen, (255, 0, 255), (max_width-280, max_height-140, 80, 30))
-                # r2 = pygame.draw.rect(screen, (255, 0, 255), (max_width-360, max_height-300, 80, 30))
                 for k in list(rectdict.keys()):
                     if rectdict[k] == 1:
                         colorNum = rectColor[list(rectdict.keys()).index(k)]
@@ -67,11 +63,7 @@ def gameloop():
                         if colorNum == '4':
                             Rcolor = (0, 0, 255)
                         rectlist.append(pygame.draw.rect(screen, Rcolor, k))
-                # rectlist.append(r1)
-                # rectlist.append(r2)
             elif screenNum == 2:
-                # r1 = pygame.draw.rect(screen, (0, 0, 255), (max_width-280, max_height-140, 80, 30))
-                # r2 = pygame.draw.rect(screen, (0, 0, 255), (max_width-360, max_height-300, 80, 30))
                 for k in list(rectdict.keys()):
                     if rectdict[k] == 2:
                         colorNum = rectColor[list(rectdict.keys()).index(k)]
@@ -87,8 +79,6 @@ def gameloop():
                         if colorNum == '4':
                             Rcolor = (0, 0, 255)
                         rectlist.append(pygame.draw.rect(screen, Rcolor, k))
-                # rectlist.append(r1)
-                # rectlist.append(r2)
         # if not topSpeed:
         #     player = pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
         # elif topSpeed:
@@ -262,18 +252,20 @@ def gameloop():
                             blue=True
                         else:
                             blue=False
-            elif onPlatform:
-                onPlatform = False
-                green2=False
-                blue=False
-                if forceY <= 0:
-                    for r in rectlist:
-                        if r.collidepoint(player.left, player.bottom) or r.collidepoint(player.right, player.bottom) or r.collidepoint(player.centerx, player.bottom):
-                            onPlatform = True
-                            if screen.get_at(r.center) == (0, 255, 0):
-                                green2=True
-                            if screen.get_at(r.center) == (0, 0, 255):
-                                blue=True
+        if onPlatform:
+            onPlatform = False
+            green2=False
+            blue=False
+            if forceY <= 0:
+                for r in rectlist:
+                    if r.collidepoint(player.left, player.bottom) or r.collidepoint(player.right, player.bottom) or r.collidepoint(player.centerx, player.bottom):
+                        onPlatform = True
+                        if screen.get_at(r.center) == (0, 255, 0):
+                            green2=True
+                        if screen.get_at(r.center) == (0, 0, 255):
+                            blue=True
+                        if screen.get_at(r.center) == (255, 255, 0) and topSpeed:
+                            onPlatform=False
         # Debug:
         # counter+=1
         # if counter % 10 == 0:
@@ -285,7 +277,7 @@ def gameloop():
             # print("MoveX: {}".format(MoveX))
             # print("MoveY: {}".format(MoveY))
             # print("Top: {}".format(r.top))
-            # os.system('clear')
+            # os.system('cls')
 
         if OnGround or onPlatform:
             if not topSpeed:
@@ -327,7 +319,7 @@ def gameloop():
                 if event.key == pygame.K_r:
                     Restart()
                 if event.key == pygame.K_s:
-                    level_save()
+                    level_update()
                 if event.key == pygame.K_p:
                     pause = not pause
                 if event.key == pygame.K_c:
@@ -352,10 +344,10 @@ def gameloop():
                         height = abs(mouse1[1]-mouse2[1])
                         with open(r'levels.txt', 'a') as l:
                             l.write(str((left, top, width, height))+" - "+str(int(Cheatnum))+" - "+'0'+"\n")
-                        level_save()
+                        level_update()
                 if event.key == pygame.K_z:
                     undo()
-                    level_save()
+                    level_update()
 def Restart():
     global max_width, max_height, screen, startTime, skyBlue, brown, green, black, Right, Up, Left, Down, MoveX, MoveY, forceX, forceY, OnGround, onPlatform, topSpeed, jumped, screen2, screenNum, mouse1, mouse2, counter, walugi, waluigiLeft, Cheatnum, oldwally, rectdict, pause, rectColor, green2, blue
     pygame.init()
@@ -387,10 +379,10 @@ def Restart():
     pause=False
     screenNum = 0
     counter=0
-    walugi = pygame.image.load(r"WAAA.png")
-    walugi = pygame.transform.scale(walugi, (20, 50))
-    waluigiLeft = pygame.transform.flip(walugi, True, False)
-    oldwally = waluigiLeft
+    # walugi = pygame.image.load(r"WAAA.png")
+    # walugi = pygame.transform.scale(walugi, (20, 50))
+    # waluigiLeft = pygame.transform.flip(walugi, True, False)
+    # oldwally = waluigiLeft
     rectdict={}
     rectColor=[]
     green2=False
@@ -402,7 +394,7 @@ def Restart():
                 rectdict[eval(line.split(' - ')[0])] = int(line.split(' - ')[1])
                 rectColor.append(line.split(' - ')[2])
     gameloop()
-def level_save():
+def level_update():
     global rectdict, mouse1, mouse2, rectColor
     rectdict={}
     rectColor=[]
