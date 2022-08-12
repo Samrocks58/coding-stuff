@@ -157,24 +157,11 @@ def gameloop():
         else:
             player = pygame.draw.rect(screen, (0, 0, 0), (MoveX, max_height-MoveY, 20, 50))
 
+        forceY=min(20, forceY)  
         if not pause:
             MoveX += forceX
             MoveY += forceY
-        # for r in rectlist:
-        #     if r.colliderect(player):
-        #         if forceX != 0:
-        #             MoveX -= forceX
-        #             forceX = 0
-        #             topSpeed = False
-        #         if r.collidepoint((player.centerx, r.centery)) and not r.collidepoint(r.centerx, player.bottom-forceY) and (forceY < 0):
-        #             onPlatform = True
-        #         else:
-        #             onPlatform = False
-        #         if onPlatform:
-        #             forceX = 0
-        #         if forceY != 0 and onPlatform:
-        #             MoveY -= forceY
-        #             forceY = 0
+
         if (MoveX > max_width-20) or (MoveX < 0):
             forceX *= -1
         MoveX=min(max_width-20, max(0, MoveX))
@@ -219,10 +206,6 @@ def gameloop():
                         MoveY = min(MoveY, max_height-r.bottom)
                         forceY = 0
                     elif (player.y < r.y):
-                        # os.system('clear')
-                        # print("MoveY: {}".format(MoveY))
-                        # print("Top: {}".format(r.top))
-                        # print("Sum: {}".format(r.top+MoveY))
                         MoveY = max(max_height-(r.top-player.height), MoveY)
                         if forceY < 0:
                             if screen.get_at(r.center) == (255, 0, 0):
@@ -238,6 +221,20 @@ def gameloop():
                             else:
                                 forceY = 0
                                 onPlatform=True
+                elif onPlatform:
+                    MoveY = max(max_height-(r.top-player.height), MoveY)
+                    if forceY < 0:
+                        forceY = 0
+                    if screen.get_at(r.center) != (255, 0, 0):
+                        onPlatform=True
+                    if screen.get_at(r.center) == (0, 255, 0):
+                        green2=True
+                    else:
+                        green2=False
+                    if screen.get_at(r.center) == (0, 0, 255):
+                        blue=True
+                    else:
+                        blue=False
                     if onPlatform:
                         MoveY = max(max_height-(r.top-player.height), MoveY)
                         if forceY < 0:
@@ -281,8 +278,6 @@ def gameloop():
 
         if OnGround or onPlatform:
             if not topSpeed:
-                # if abs(forceX) > 0:
-                #     forceX *= abs(forceX)**63/64
                 if forceX < 0:
                     forceX += 0.2
                 elif forceX > 0:
@@ -290,7 +285,6 @@ def gameloop():
                 if abs(forceX) < 0.2:
                     forceX=0
 
-        # OnGround = True
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
