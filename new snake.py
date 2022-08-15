@@ -27,6 +27,8 @@ def restart():
     gameloop()
 
 def game_over():
+    global length
+    print(f"Score: {length}")
     root=Tk()
     root.wm_withdraw()
     MsgBox=messagebox.askyesno("You Died!!!", "Do you want to play again?")
@@ -69,7 +71,6 @@ def gameloop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
-                if event.key == pygame.K_SPACE: length += 1
                 if event.key == pygame.K_DOWN:
                     if direction % 2 == 1:
                         direction=4
