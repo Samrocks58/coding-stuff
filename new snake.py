@@ -8,7 +8,7 @@ def rand_pos():
 def cord_find(x, y): return (x*25, y*25)
 
 def restart():
-    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos
+    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed
     screen = pygame.display.set_mode((700, 500))
     Red = (255, 0, 0)
     Black = (0, 0, 0)
@@ -24,6 +24,7 @@ def restart():
     coin = pygame.image.load(r'non-program bulcrapo/coin.png')
     coin = pygame.transform.scale(coin, (25, 25))
     coinPos = rand_pos()
+    keyPressed=False
     gameloop()
 
 def game_over():
@@ -39,27 +40,11 @@ def game_over():
         root.destroy()
         quit()
 
-screen = pygame.display.set_mode((700, 500))
-Red = (255, 0, 0)
-Black = (0, 0, 0)
-White = (255, 255, 255)
-max_width = 700/25
-max_height = 500/25
-MoveX=14
-MoveY=10
-old_pos=(14, 10)
-direction=1 #1: right 2: up 3: left 4: down
-length = 5
-painted_snakes = [(10, 10), (11, 10), (12, 10), (13, 10)]
-coin = pygame.image.load(r'non-program bulcrapo/coin.png')
-coin = pygame.transform.scale(coin, (25, 25))
-coinPos = rand_pos()
-
 def gameloop():
-    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos
+    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed
     while True:
         screen.fill(White)
-        
+
         cord = cord_find(MoveX-1, MoveY-1)
         leadSnake = pygame.draw.rect(screen, Red, (cord[0], cord[1], 25, 25))
         screen.blit(coin, cord_find(coinPos[0]-1, coinPos[1]-1))
@@ -67,25 +52,31 @@ def gameloop():
             cord = cord_find(snake[0]-1, snake[1]-1)
             pygame.draw.rect(screen, Black, (cord[0], cord[1], 25, 25))
         
+        keyPressed=False
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
-                if event.key == pygame.K_DOWN:
-                    if direction % 2 == 1:
-                        direction=4
-                if event.key == pygame.K_UP:
-                    if direction % 2 == 1:
-                        direction=2
-                if event.key == pygame.K_LEFT:
-                    if direction % 2 == 0:
-                        direction=3
-                if event.key == pygame.K_RIGHT:
-                    if direction % 2 == 0:
-                        direction=1
+                if not keyPressed:
+                    if event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        if direction % 2 == 1:
+                            direction=4
+                            keyPressed=True
+                    elif event.key == pygame.K_UP or event.key == pygame.K_w:
+                        if direction % 2 == 1:
+                            direction=2
+                            keyPressed=True
+                    elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                        if direction % 2 == 0:
+                            direction=3
+                            keyPressed=True
+                    elif event.key == pygame.K_RIGHT or event.key == pygame.K_s:
+                        if direction % 2 == 0:
+                            direction=1
+                            keyPressed=True
             if event.type == pygame.QUIT:
                 quit()
-        
+
         if (MoveX, MoveY) in painted_snakes:
             game_over()
         

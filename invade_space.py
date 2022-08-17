@@ -117,7 +117,7 @@ def opponent_shoot():
     opponent_shots.append([max_width//2-3, rect_y])
 
 def game_over():
-    return True
+    return
     quit()
 
 def add_score(num):
@@ -147,10 +147,10 @@ def hitPointChange():
 pygame.mouse.set_visible(False)
 while True:
     end_time=time.perf_counter()
-    if 1/(end_time-start_time) < 1000:
+    if 1/(end_time-start_time) < 2000:
         time_delta_time=end_time-start_time
     else:
-        time_delta_time=1/200
+        time_delta_time=1/500
     start_time=time.perf_counter()
     screen.fill(black)
     if opponentHitCounter >= 1:
@@ -324,5 +324,3 @@ while True:
                 del parry_shots[parry_shots.index(i)]
                 for op in opponentShips:
                     opponentShips[op].parried=False
-
-# 
