@@ -13,5 +13,5 @@ while not (playlistName.lower() == "quit" or playlistName.lower() == "q"):
     if playlistName.lower() == "all":
         for p2 in playlists:
             if p2['title'] != "Your Likes":
-                print(f"{p2['title']}: {ytmusic.get_playlist(p2['playlistId'])['duration']}")
-    playlistName = input("What playlist do you want to find the total time of?: ")
+                print(f"\n{p2['title']}: {ytmusic.get_playlist(p2['playlistId'])['duration']}")
+    playlistName = input("\nWhat playlist do you want to find the total time of?: ")
