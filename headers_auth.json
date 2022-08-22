@@ -1,0 +1,22 @@
+{
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "en-US,en;q=0.5",
+    "authorization": "SAPISIDHASH 1661195451_48500f75a1ad297683c6afa672f037a1b02fe0ce",
+    "connection": "keep-alive",
+    "content-encoding": "gzip",
+    "content-type": "application/json",
+    "cookie": "VISITOR_INFO1_LIVE=kbaaoEL0N6U; _gcl_au=1.1.363224515.1661193262; SID=NwhCkvfMc0-G5MdlajVoX7abUgyO6Y2Jz52DtMx8xuO5JpHMXqf5iaRwjSMBViRj2wyPpQ.; __Secure-1PSID=NwhCkvfMc0-G5MdlajVoX7abUgyO6Y2Jz52DtMx8xuO5JpHMakjw2_ZiI1KBVkP67x3J0Q.; __Secure-3PSID=NwhCkvfMc0-G5MdlajVoX7abUgyO6Y2Jz52DtMx8xuO5JpHMct0x647IVoQEsUujvDWiWg.; HSID=AWJIj2N2wZvbwGVJ9; SSID=ACw5dJTCuAATWGA6a; APISID=Ad4nqUE1pTlkihE2/AV0L8OWwX3EA585s8; SAPISID=3fPsoEvn4K3f3F9y/AzTsIQJQnYrGicjiz; __Secure-1PAPISID=3fPsoEvn4K3f3F9y/AzTsIQJQnYrGicjiz; __Secure-3PAPISID=3fPsoEvn4K3f3F9y/AzTsIQJQnYrGicjiz; LOGIN_INFO=AFmmF2swRQIhAM8PNCi0W-6kxHd09C_f6n8HkL9QbIfwv3ziyDRWAMdaAiByON64jrWrjWjXu1piRaHqXLn3rq8Po8ItJOp4lvpLWA:QUQ3MjNmelBpWE9hdFBzdmpxRlA4Q1pSSkowdjktZlNPWGwtcW9COEtHVFpNNGdjU3dTSWpUOGpDeUkyalNDcDBxZ0pMXzR1MTFPNjFCQWVCbVNLMGs4WDRUaFJEaWR0eDRZZG84a2JHcjFmZUl6clp1TGtFV19ISzBSTkZGOXBZZmtQNTZza1lRVGRtQzVMWjNOb1JJb0RIdmt2dGRrRDFn; SIDCC=AEf-XMQO5m39nlmMQjYr-dymxpB9RYb-xD79pcSprHs5RIZ9VrE2kdhzGsQ5FqBOE2OvBMK6Hg; __Secure-1PSIDCC=AEf-XMTZ5QD62Vx2z3pcX-6GS9oXew0BFT6kI0oBdzJEWsulc00b58T1J414o4khkc9pSOGb; __Secure-3PSIDCC=AEf-XMTB2PH6DmCtWCg8n4Zwf90xqsthWlOG0NpIJYJgtCpYh4iwBXYe6vhPU_NBIwNyeR8M; PREF=library_tab_browse_id=FEmusic_liked_playlists; YSC=-EAZ0lrhd3g",
+    "origin": "https://music.youtube.com",
+    "referer": "https://music.youtube.com/",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "same-origin",
+    "sec-fetch-site": "same-origin",
+    "te": "trailers",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "x-goog-authuser": "1",
+    "x-goog-visitor-id": "CgtrYmFhb0VMME42VSjep4-YBg%3D%3D",
+    "x-origin": "https://music.youtube.com",
+    "x-youtube-client-name": "67",
+    "x-youtube-client-version": "1.20220817.01.00"
+}
