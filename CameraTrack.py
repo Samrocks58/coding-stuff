@@ -2,19 +2,46 @@ import cv2, numpy, sys
 
 video_capture = cv2.VideoCapture(0)
 
+hue_change=15
+sat_change=30
+value_change=80
+starting_color = [0, 0, 0]
+
+
+def draw_circle(event,x,y,flags,param):  
+    global hsv, lower_color, upper_color, hue_change, value_change, sat_change, starting_color
+    if(event == cv2.EVENT_LBUTTONDOWN):
+        starting_color = hsv[y, x]
+        upper_color = numpy.array([starting_color[0]+hue_change, starting_color[1]+sat_change, starting_color[2]+value_change])
+        lower_color = numpy.array([starting_color[0]-hue_change, starting_color[1]-sat_change, starting_color[2]-value_change])
+
+def update():
+    global upper_color, lower_color, starting_color
+    upper_color = numpy.array([starting_color[0]+hue_change, starting_color[1]+sat_change, starting_color[2]+value_change])
+    lower_color = numpy.array([starting_color[0]-hue_change, starting_color[1]-sat_change, starting_color[2]-value_change])      
+
+cv2.namedWindow('frame')  
+cv2.setMouseCallback('frame',draw_circle)  
+
+lower_color = numpy.array([0, 0, 0])#v=50
+upper_color = numpy.array([0, 0, 0])
+prev_char=''
+cur_char=''
+
 while True:
     ret, frame = video_capture.read()
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    lower_green = numpy.array([80, 100, 25])#v=50
-    upper_green = numpy.array([100, 255, 255])
+    # lower_color = numpy.array([80, 100, 25])#v=50
+    # upper_color = numpy.array([100, 255, 255])
 
-    mask = cv2.inRange(hsv, lower_green, upper_green)
+    mask = cv2.inRange(hsv, lower_color, upper_color)
     small_mask=cv2.resize(mask, (0, 0), fx=0.25, fy=0.25)
 
     NumXY = 0
     TotalX = 0
     TotalY = 0
+    res = cv2.bitwise_and(frame, frame, mask=mask)
     for i in range(0, small_mask.shape[0]):
         for j in range(0, small_mask.shape[1]):
             if small_mask[i, j] == 255:
@@ -27,15 +54,46 @@ while True:
         cv2.rectangle(frame, (0, CordX-10), (640, CordX+10), (0, 0, 255), cv2.FILLED)
         cv2.rectangle(frame, (CordY-10, 0), (CordY+10, 480), (0, 0, 255), cv2.FILLED)
 
-    res = cv2.bitwise_and(frame, frame, mask=mask)
     cv2.imshow("frame", frame)
     cv2.imshow("res", res)
+    
+    c = cv2.waitKey(1)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if c == 27:
         break
+    if c > -1 and c != prev_char:
+        cur_char = c
+    prev_char = c
+    if cur_char == ord('q'):
+        break
+    if cur_char == ord('h'):
+        hue_change += 1
+        update()
+    if cur_char == ord('n'):
+        hue_change -= 1
+        update()
+    if cur_char == ord('s'):
+        sat_change += 1
+        update()
+    if cur_char == ord('x'):
+        sat_change -= 1
+        update()
+    if cur_char == ord('v'):
+        value_change += 1
+        update()
+    if cur_char == ord('f'):
+        value_change -= 1
+        update()
+    if cur_char == ord('c'):
+        lower_color = numpy.array([0, 0, 0])
+        upper_color = numpy.array([0, 0, 0])
+    cur_char=''
 
 video_capture.release()
 cv2.destroyAllWindows()
+print(f"hue change: {hue_change}")
+print(f"saturation change: {sat_change}")
+print(f"value change: {value_change}")
 # Useful Functions in cv2:
 #   
 # small_frame=cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
