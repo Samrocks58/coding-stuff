@@ -2,13 +2,12 @@ import cv2, numpy, sys
 
 video_capture = cv2.VideoCapture(0)
 
-hue_change=15
+hue_change=10
 sat_change=30
-value_change=80
+value_change=50
 starting_color = [0, 0, 0]
 
-
-def draw_circle(event,x,y,flags,param):  
+def click(event,x,y,flags,param):  
     global hsv, lower_color, upper_color, hue_change, value_change, sat_change, starting_color
     if(event == cv2.EVENT_LBUTTONDOWN):
         starting_color = hsv[y, x]
@@ -21,7 +20,7 @@ def update():
     lower_color = numpy.array([starting_color[0]-hue_change, starting_color[1]-sat_change, starting_color[2]-value_change])      
 
 cv2.namedWindow('frame')  
-cv2.setMouseCallback('frame',draw_circle)  
+cv2.setMouseCallback('frame',click)  
 
 lower_color = numpy.array([0, 0, 0])#v=50
 upper_color = numpy.array([0, 0, 0])
@@ -54,6 +53,13 @@ while True:
         cv2.rectangle(frame, (0, CordX-10), (640, CordX+10), (0, 0, 255), cv2.FILLED)
         cv2.rectangle(frame, (CordY-10, 0), (CordY+10, 480), (0, 0, 255), cv2.FILLED)
 
+    # res = cv2.Canny(frame,100,70)
+    # cv2.imshow("Canny Image",frame)
+
+    # frame2 = [numpy.uint8(numpy.clip(i,0,255)) for i in frame]
+    # frame = cv2.GaussianBlur(frame, 5, 5)
+    # cv2.fastNlMeansDenoisingColoredMulti(res, 2, 5, None, 4, 7, 35)
+    
     cv2.imshow("frame", frame)
     cv2.imshow("res", res)
     

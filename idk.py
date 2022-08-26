@@ -1,7 +1,5 @@
-import imp
 from math import sqrt
 from statistics import median
-import time
 import pygame, random
 
 pygame.init()

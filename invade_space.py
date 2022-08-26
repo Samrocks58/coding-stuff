@@ -1,4 +1,4 @@
-import pygame, time
+import pygame, time, os
 from level import level_select
 
 
@@ -51,16 +51,15 @@ D=100
 MoveX=max_width//2-rect_x//2
 MoveY=max_height-rect_y
 
-# def frame_avg(list):
-#     sum=0
-#     for i in list:
-#         if i < 800:
-#             sum += i
-#     return sum // len(list)
+def frame_avg(list):
+    sum=0
+    for i in list:
+        sum += i
+    return sum // len(list)
 
 # fps=1/time_delta_time
 # fps_list.append(fps)
-# # print(f"Average FPS: {frame_avg(fps_list)}")
+# print(f"Average FPS: {frame_avg(fps_list)}")
 
 start_time=time.perf_counter()
 fps_list=[]
@@ -147,10 +146,15 @@ def hitPointChange():
 pygame.mouse.set_visible(False)
 while True:
     end_time=time.perf_counter()
-    if 1/(end_time-start_time) < 2000:
+    os.system('cls')
+    if 1/(end_time-start_time) < 1000:
         time_delta_time=end_time-start_time
     else:
-        time_delta_time=1/500
+        time_delta_time=1/1000
+    print(f"timeDelta Time: {1/time_delta_time}")
+    fps=1/time_delta_time
+    fps_list.append(fps)
+    print(f"Average FPS: {frame_avg(fps_list)}")
     start_time=time.perf_counter()
     screen.fill(black)
     if opponentHitCounter >= 1:
@@ -253,7 +257,7 @@ while True:
                 elif oppPos[1] >= MoveY-10-25-5:
                     if shield_out:
                         parryTime2=time.perf_counter()
-                        if parryTime2-parryTime <= 10*time_delta_time: # Old time : 0.2 seconds
+                        if parryTime2-parryTime <= 20*time_delta_time: # Old time : 0.2 seconds
                             parry_shots.append(oppPos)
                             opponentShips[op].parried=True
                             del opponentShips[op].shots[opponentShips[op].shots.index(oppPos)]
@@ -271,13 +275,13 @@ while True:
     #     if i == 1:
     #         print(keys.index(i))
     if keys[Left]:
-        MoveX -= 3 * time_delta_time * 200
+        MoveX -= 3 * time_delta_time * 1000
     if keys[Right]:
-        MoveX += 3 * time_delta_time * 200
+        MoveX += 3 * time_delta_time * 1000
     if keys[A] == 1:
-        MoveX -= 3 * time_delta_time * 200
+        MoveX -= 3 * time_delta_time * 1000
     if keys[D] == 1:
-        MoveX += 3 * time_delta_time * 200
+        MoveX += 3 * time_delta_time * 1000
     if keys[115]:
         shield = pygame.draw.rect(screen, (0, 0, 255), (MoveX-10, MoveY-12, rect_x+20, 10))
         shield_out=True
@@ -308,18 +312,18 @@ while True:
                     #     lazer_shoot(max_width-overhang, MoveY)
     if len(shots) > 0:
         for i in shots:
-            i[1] -= 5 * time_delta_time * 200
+            i[1] -= 5 * time_delta_time * 1000
             if i[1] < heart_y:
                 del shots[shots.index(i)]
     for op in opponentShips:
         if len(opponentShips[op].shots) > 0:
             for i in opponentShips[op].shots:
-                i[1] += 5 * time_delta_time * 200
+                i[1] += 5 * time_delta_time * 1000
                 if i[1] > max_height:
                     del opponentShips[op].shots[opponentShips[op].shots.index(i)]
     if len(parry_shots) > 0:
         for i in parry_shots:
-            i[1] -= 5 * time_delta_time * 200
+            i[1] -= 5 * time_delta_time * 1000
             if i[1] < heart_y:
                 del parry_shots[parry_shots.index(i)]
                 for op in opponentShips:

@@ -30,6 +30,16 @@ def level_select():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
+                if event.key == pygame.K_1:
+                    return 1
+                if event.key == pygame.K_2:
+                    return 2
+                if event.key == pygame.K_3:
+                    return 3
+                if event.key == pygame.K_4:
+                    return 4
+                if event.key == pygame.K_5:
+                    return 5
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousepos = pygame.mouse.get_pos()
                 for i in range(len(levelrects)):
