@@ -247,6 +247,12 @@ def check_inputs():
             quit()
         if event.type == pygame.KEYDOWN:
             # if snake.direction == "right" or snake.direction == "left":
+            if event.key == pygame.K_SPACE:
+
+                keys=list(snakes.keys())
+                snakes[keys[-1]].create_snake()
+                keys=list(snakes.keys())
+                snakes[keys[-1]].create_snake()
             if not key_pressed:
                 if event.key == pygame.K_UP:
                     snakes["snake1"].change_direction("up")

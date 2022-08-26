@@ -9,12 +9,12 @@ def cord_find(x, y): return (x*25, y*25)
 
 def restart():
     global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed
-    screen = pygame.display.set_mode((700, 500))
+    screen = pygame.display.set_mode((625, 500))
     Red = (255, 0, 0)
     Black = (0, 0, 0)
     White = (255, 255, 255)
-    max_width = 700/25
-    max_height = 500/25
+    max_width = 25
+    max_height = 20
     MoveX=14
     MoveY=10
     old_pos=(14, 10)
