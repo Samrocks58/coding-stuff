@@ -10,10 +10,20 @@ else:
 with open(filename,'wb') as f:
     shutil.copyfileobj(picture.raw, f)
 image=cv2.imread(filename)
+prev_char=''
+cur_char=''
 while True:
     cv2.imshow("doggo", image)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    c = cv2.waitKey(1)
+
+    if c == 27:
         break
+    if c > -1 and c != prev_char:
+        cur_char = c
+    prev_char = c
+    if cur_char == ord('q'):
+        break
+    cur_char=''
 cv2.destroyAllWindows()
 os.remove(filename)
 quit()
