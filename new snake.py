@@ -3,7 +3,10 @@ import pygame, time
 from tkinter import Tk, messagebox
 
 def rand_pos():
-    return [randint(1, max_width), randint(1, max_height)]
+    while 1:
+        randpos=[randint(1, max_width), randint(1, max_height)]
+        if not (randpos in painted_snakes or randpos == (MoveX,MoveY) or (direction%2==1 and abs(randpos[1]-MoveY)<=3) or (direction%2==0 and abs(randpos[0]-MoveX)<=3)): 
+            return randpos
 
 def cord_find(x, y): return (x*25, y*25)
 
