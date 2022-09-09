@@ -8,7 +8,6 @@ def frame_avg(list):
                 sum += i
         return sum // len(list)
 
-
 class Opponent():
     def __init__(self, pos, image):
         self.pos=self.get_pos(pos)
@@ -67,11 +66,7 @@ def gameloop():
     global start_time, opponentHitCounter, won, overheat, shieldHits, playerHit, MoveX, shield_out, shieldOffTime, hitTime2, opponentHitTime2, fps_list
     while True:
         end_time=time.perf_counter()
-        # if 1/(end_time-start_time) < 1000:
-        #     time_delta_time=end_time-start_time
-        # else:
-        #     time_delta_time=1/300
-        time_delta_time=end_time-start_time
+        time_delta_time=end_time-start_time    
         start_time=time.perf_counter()
         screen.fill(black)
         if opponentHitCounter >= 1:
