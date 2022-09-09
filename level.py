@@ -6,8 +6,10 @@ def level_select():
     max_height=600
     screen=pygame.display.set_mode((max_width, max_height))
     pygame.font.init()
-    levelfont=pygame.font.Font(r"C:\Users\smprc\OneDrive\Desktop\sharingcodebetweencomputers\\zig.ttf", 40)
+    pygame.mouse.set_visible(True)
+    levelfont=pygame.font.Font(r"non-program bulcrapo/zig.ttf", 40)
     levelrects={}
+    eventKeys=[pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]
 
     while True:
         screen.fill(black)
@@ -30,16 +32,10 @@ def level_select():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
-                if event.key == pygame.K_1:
-                    return 1
-                if event.key == pygame.K_2:
-                    return 2
-                if event.key == pygame.K_3:
-                    return 3
-                if event.key == pygame.K_4:
-                    return 4
-                if event.key == pygame.K_5:
-                    return 5
+                else:
+                    for k in eventKeys:
+                        if event.key == k:
+                            return eventKeys.index(k)+1
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousepos = pygame.mouse.get_pos()
                 for i in range(len(levelrects)):
