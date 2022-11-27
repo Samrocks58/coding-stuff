@@ -11,8 +11,9 @@ def rand_pos():
 def cord_find(x, y): return (x*25, y*25)
 
 def restart():
-    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed
+    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed, Font, fontTxt, Orange
     screen = pygame.display.set_mode((625, 500))
+    pygame.font.init()
     Red = (255, 0, 0)
     Black = (0, 0, 0)
     White = (255, 255, 255)
@@ -28,6 +29,9 @@ def restart():
     coin = pygame.transform.scale(coin, (25, 25))
     coinPos = rand_pos()
     keyPressed=False
+    Font=pygame.font.Font(r'C:\Users\smprc\Downloads\gibster\GibsterRegular.ttf', 100)
+    Orange=(255, 95, 0)
+    fontTxt = Font.render(str(length), False, Orange)
     gameloop()
 
 def game_over():
@@ -44,16 +48,16 @@ def game_over():
         quit()
 
 def gameloop():
-    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed
+    global screen, Red, Black, White, max_width, max_height, MoveX, MoveY, old_pos, direction, length, painted_snakes, coin, coinPos, keyPressed, Font, fontTxt, Orange
     while True:
         screen.fill(White)
-
         cord = cord_find(MoveX-1, MoveY-1)
         leadSnake = pygame.draw.rect(screen, Red, (cord[0], cord[1], 25, 25))
         screen.blit(coin, cord_find(coinPos[0]-1, coinPos[1]-1))
         for snake in painted_snakes:
             cord = cord_find(snake[0]-1, snake[1]-1)
             pygame.draw.rect(screen, Black, (cord[0], cord[1], 25, 25))
+        screen.blit(fontTxt, (0, 0))
         
         keyPressed=False
         for event in pygame.event.get():
@@ -79,7 +83,7 @@ def gameloop():
                             keyPressed=True
             if event.type == pygame.QUIT:
                 quit()
-
+                
         if (MoveX, MoveY) in painted_snakes:
             game_over()
         
@@ -105,6 +109,7 @@ def gameloop():
         if [MoveX, MoveY] == coinPos:
             length += 1
             coinPos = rand_pos()
+            fontTxt = Font.render(str(length), False, Orange)
 
         painted_snakes.append(old_pos)
         old_pos=(MoveX, MoveY)

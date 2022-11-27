@@ -14,18 +14,22 @@ soup = BeautifulSoup(html, 'html.parser')
     #     pass
     # id="cameraCont"
 
+    # https://direct.earthnetworks.com/DataSevice/GetData.ashx?dt=cl&la=41.8233&lo=-71.4208&f=loadClosestCam
+
 for div in soup.find_all('div'):
-    if div.get('id') == "camImgTD":
-        # print(div)
-        for div2 in div.find_all(id="cameraCont"):
-            try: 
-                uls = div2.find_all("ul")
-                print(len(uls))
-                lis = div2.find_all("li")
-                print(len(lis))
-            except Exception: pass
-            print(uls)
-            for ul in uls:
-                if ul.get('class') == "timeLapseCamera":
-                    for li in ul.get_all("li"):
-                        print(li.find("img").get("data-src"))
+    if div.get('id') == "tabs-camera":
+        for div2 in div.find_all('div'):
+            if div2.get('id') == "camImgTD":
+                # print(div)
+                for div3 in div2.find_all(id="cameraCont"):
+                    try: 
+                        uls = div3.find_all("ul")
+                        print(len(uls))
+                        lis = div3.find_all("li")
+                        print(len(lis))
+                    except Exception: pass
+                    print(uls)
+                    for ul in uls:
+                        if ul.get('class') == "timeLapseCamera":
+                            for li in ul.get_all("li"):
+                                print(li.find("img").get("data-src"))
