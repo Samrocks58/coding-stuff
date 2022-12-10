@@ -1,3 +1,4 @@
+from pdb import Restart
 from random import randint
 import pygame, time
 from tkinter import Tk, messagebox
@@ -64,6 +65,8 @@ def gameloop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     quit()
+                if event.key == pygame.K_r:
+                    restart()
                 if not keyPressed:
                     if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                         if direction % 2 == 1:
