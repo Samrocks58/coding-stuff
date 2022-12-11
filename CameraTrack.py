@@ -1,3 +1,4 @@
+from traceback import print_stack
 import cv2, numpy, sys
 
 video_capture = cv2.VideoCapture(0)
@@ -6,6 +7,7 @@ hue_change=10
 sat_change=30
 value_change=50
 starting_color = [0, 0, 0]
+white = [255, 255, 255]
 
 def click(event,x,y,flags,param):  
     global hsv, lower_color, upper_color, hue_change, value_change, sat_change, starting_color
@@ -34,27 +36,31 @@ while True:
     # lower_color = numpy.array([80, 100, 25])#v=50
     # upper_color = numpy.array([100, 255, 255])
 
-    mask = cv2.inRange(hsv, lower_color, upper_color)
-    small_mask=cv2.resize(mask, (0, 0), fx=0.25, fy=0.25)
+    # mask = cv2.inRange(hsv, lower_color, upper_color)
+    # small_mask=cv2.resize(mask, (0, 0), fx=0.25, fy=0.25)
 
-    NumXY = 0
-    TotalX = 0
-    TotalY = 0
-    res = cv2.bitwise_and(frame, frame, mask=mask)
-    for i in range(0, small_mask.shape[0]):
-        for j in range(0, small_mask.shape[1]):
-            if small_mask[i, j] == 255:
-                NumXY += 1
-                TotalX += i
-                TotalY += j
-    if NumXY != 0:
-        CordX = int(4*(TotalX/NumXY)) 
-        CordY = int(4*(TotalY/NumXY)) 
-        cv2.rectangle(frame, (0, CordX-10), (640, CordX+10), (0, 0, 255), cv2.FILLED)
-        cv2.rectangle(frame, (CordY-10, 0), (CordY+10, 480), (0, 0, 255), cv2.FILLED)
+    # NumXY = 0
+    # TotalX = 0
+    # TotalY = 0
+    # res = cv2.bitwise_and(frame, frame, mask=mask)
+    # for i in range(0, small_mask.shape[0]):
+    #     for j in range(0, small_mask.shape[1]):
+    #         if small_mask[i, j] == 255:
+    #             NumXY += 1
+    #             TotalX += i
+    #             TotalY += j
+    # if NumXY != 0:
+    #     CordX = int(4*(TotalX/NumXY)) 
+    #     CordY = int(4*(TotalY/NumXY)) 
+    #     cv2.rectangle(frame, (0, CordX-10), (640, CordX+10), (0, 0, 255), cv2.FILLED)
+    #     cv2.rectangle(frame, (CordY-10, 0), (CordY+10, 480), (0, 0, 255), cv2.FILLED)
 
-    # res = cv2.Canny(frame,100,70)
-    # cv2.imshow("Canny Image",frame)
+    res = cv2.Canny(frame,100,70)
+    small_res=cv2.resize(res, (0, 0), fx=0.50, fy=0.50)
+    for y in range(len(small_res)):
+        for x in range(len(small_res[y])):
+            if res[y*2, x*2] == 255:
+                frame[y*2, x*2] = [255, 255, 255]
 
     # frame2 = [numpy.uint8(numpy.clip(i,0,255)) for i in frame]
     # frame = cv2.GaussianBlur(frame, 5, 5)
@@ -93,6 +99,13 @@ while True:
     if cur_char == ord('c'):
         lower_color = numpy.array([0, 0, 0])
         upper_color = numpy.array([0, 0, 0])
+    if cur_char == ord('r'):
+        # print(res[0])
+        for y in range(len(res)):
+            for x in range(len(res[0])):
+                if res[y, x] == 255:
+                    print(res[y].index(255))
+                    frame[x, y] = [255, 255, 255]
     cur_char=''
 
 video_capture.release()
