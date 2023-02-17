@@ -1,7 +1,7 @@
 import pygame, time, os
 
 def gameloop():
-    global max_width, max_height, screen, startTime, skyBlue, brown, green, black, Right, Up, Left, Down, MoveX, MoveY, forceX, forceY, OnGround, onPlatform, topSpeed, jumped, screen2, screenNum, mouse1, mouse2, counter, walugi, waluigiLeft, Cheatnum, oldwally, rectdict, pause, rectColor, green2, blue
+    global max_width, max_height, screen, startTime, skyBlue, brown, green, black, Right, Up, Left, Down, MoveX, MoveY, forceX, forceY, OnGround, onPlatform, topSpeed, jumped, screen2, screenNum, mouse1, mouse2, counter, walugi, waluigiLeft, Cheatnum, oldwally, rectdict, pause, rectColor, green2, blue, cheats
     while True:
         endTime = time.perf_counter()
         if 1/60 - (endTime - startTime) > 0:
@@ -45,6 +45,8 @@ def gameloop():
                         Rcolor = (255, 255, 0)
                     if colorNum == '4':
                             Rcolor = (0, 0, 255)
+                    if cheats:
+                        Rcolor = (50, 50, 50) 
                     rectlist.append(pygame.draw.rect(screen, Rcolor, k))
         if screen2:
             if screenNum == 1:
@@ -62,6 +64,8 @@ def gameloop():
                             Rcolor = (255, 255, 0)
                         if colorNum == '4':
                             Rcolor = (0, 0, 255)
+                        if cheats:
+                            Rcolor = (50, 50, 50) 
                         rectlist.append(pygame.draw.rect(screen, Rcolor, k))
             elif screenNum == 2:
                 for k in list(rectdict.keys()):
@@ -78,6 +82,8 @@ def gameloop():
                             Rcolor = (255, 255, 0)
                         if colorNum == '4':
                             Rcolor = (0, 0, 255)
+                        if cheats:
+                            Rcolor = (50, 50, 50) 
                         rectlist.append(pygame.draw.rect(screen, Rcolor, k))
         # if not topSpeed:
         #     player = pygame.draw.rect(screen, black, (MoveX, max_height-MoveY, 20, 50))
@@ -316,10 +322,15 @@ def gameloop():
                     level_update()
                 if event.key == pygame.K_p:
                     pause = not pause
+                if event.key == pygame.K_x:
+                    cheats = not cheats
                 if event.key == pygame.K_c:
                     with open(r'levels.txt', 'w') as l:
                         l.write("")
                 if event.key == pygame.K_UP:
+                    if cheats:
+                        forceY += 15
+                        jumped = True
                     if OnGround or onPlatform:
                         if not blue:
                             forceY += 15
@@ -343,7 +354,7 @@ def gameloop():
                     undo()
                     level_update()
 def Restart():
-    global max_width, max_height, screen, startTime, skyBlue, brown, green, black, Right, Up, Left, Down, MoveX, MoveY, forceX, forceY, OnGround, onPlatform, topSpeed, jumped, screen2, screenNum, mouse1, mouse2, counter, walugi, waluigiLeft, Cheatnum, oldwally, rectdict, pause, rectColor, green2, blue
+    global max_width, max_height, screen, startTime, skyBlue, brown, green, black, Right, Up, Left, Down, MoveX, MoveY, forceX, forceY, OnGround, onPlatform, topSpeed, jumped, screen2, screenNum, mouse1, mouse2, counter, walugi, waluigiLeft, Cheatnum, oldwally, rectdict, pause, rectColor, green2, blue, cheats
     pygame.init()
     pygame.display.init()
     max_width = 800
@@ -373,6 +384,7 @@ def Restart():
     pause=False
     screenNum = 0
     counter=0
+    cheats=False
     # walugi = pygame.image.load(r"WAAA.png")
     # walugi = pygame.transform.scale(walugi, (20, 50))
     # waluigiLeft = pygame.transform.flip(walugi, True, False)

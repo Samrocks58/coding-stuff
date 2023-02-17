@@ -18,13 +18,13 @@ Black=(0, 0, 0)
 Center_Point=(MoveX, MoveY)
 Radius = 40
 
-Target = pygame.image.load(r"C:\Users\spear\OneDrive\Desktop\Desktop Folder\new target.png")
+Target = pygame.image.load(r"C:\Users\smprc\AppData\Local\Programs\Microsoft VS Code\coding files\my programs\non-program bulcrapo\target.png")
 Target = pygame.transform.scale(Target, (100, 100))
 
 Cusor_width=50
 Cursor_height=50
 
-Cursor_icon = pygame.image.load(r"C:\Users\spear\OneDrive\Desktop\Desktop Folder\cursor target.png")
+Cursor_icon = pygame.image.load(r"C:\Users\smprc\AppData\Local\Programs\Microsoft VS Code\coding files\my programs\non-program bulcrapo\target cursor.png")
 Cursor_icon = pygame.transform.scale(Cursor_icon, (Cusor_width, Cursor_height))
 
 screen = pygame.display.set_mode((width, height))#, depth=0, flags=pygame.FULLSCREEN)
