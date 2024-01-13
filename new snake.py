@@ -90,7 +90,7 @@ def gameloop():
         if (MoveX, MoveY) in painted_snakes:
             game_over()
         
-        time.sleep(1/16)
+        time.sleep(1/16 * (0.98**(length-10)))
         if direction == 1:
             MoveX += 1
         elif direction == 2:
