@@ -290,23 +290,23 @@ def gameloop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse2 = (0, 0)
-                mouse1 = pygame.mouse.get_pos()
-                Cheatnum = screen2
-                for r in rectlist:
-                    if r.collidepoint(mouse1):
-                        writelist=[]
-                        for i in range(len(list(rectdict.keys()))):
-                            if list(rectdict.keys())[i] == (r.left, r.top, r.width, r.height):
-                                if int(rectColor[i]) < 5:
-                                    rectColor[i] = str(eval(rectColor[i]+"+1"))
-                                else:
-                                    rectColor[i] = '0'
-                            writelist.append(str(list(rectdict.keys())[i])+" - "+str(rectdict[list(rectdict.keys())[i]])+" - "+str(rectColor[i])+"\n")
-                        with open(r'levels.txt', 'w') as l:
-                            for w in writelist:
-                                l.write(w)
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #     mouse2 = (0, 0)
+            #     mouse1 = pygame.mouse.get_pos()
+            #     Cheatnum = screen2
+            #     for r in rectlist:
+            #         if r.collidepoint(mouse1):
+            #             writelist=[]
+            #             for i in range(len(list(rectdict.keys()))):
+            #                 if list(rectdict.keys())[i] == (r.left, r.top, r.width, r.height):
+            #                     if int(rectColor[i]) < 5:
+            #                         rectColor[i] = str(eval(rectColor[i]+"+1"))
+            #                     else:
+            #                         rectColor[i] = '0'
+            #                 writelist.append(str(list(rectdict.keys())[i])+" - "+str(rectdict[list(rectdict.keys())[i]])+" - "+str(rectColor[i])+"\n")
+            #             with open(r'levels.txt', 'w') as l:
+            #                 for w in writelist:
+            #                     l.write(w)
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse2 = pygame.mouse.get_pos()
             if event.type == pygame.KEYDOWN:
@@ -314,12 +314,12 @@ def gameloop():
                     quit()
                 if event.key == pygame.K_r:
                     Restart()
-                if event.key == pygame.K_s:
-                    level_update()
-                if event.key == pygame.K_p:
-                    pause = not pause
-                if event.key == pygame.K_x:
-                    cheats = not cheats
+                # if event.key == pygame.K_s:
+                #     level_update()
+                # if event.key == pygame.K_p:
+                #     pause = not pause
+                # if event.key == pygame.K_x:
+                #     cheats = not cheats
                 if event.key == pygame.K_n:
                     print(screenNum)
                 # if event.key == pygame.K_c:
