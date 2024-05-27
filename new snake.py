@@ -1,4 +1,3 @@
-from pdb import Restart
 from random import randint
 import pygame, time
 from tkinter import Tk, messagebox
@@ -80,7 +79,7 @@ def gameloop():
                         if direction % 2 == 0:
                             direction=3
                             keyPressed=True
-                    elif event.key == pygame.K_RIGHT or event.key == pygame.K_s:
+                    elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                         if direction % 2 == 0:
                             direction=1
                             keyPressed=True

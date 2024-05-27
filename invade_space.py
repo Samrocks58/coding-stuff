@@ -66,7 +66,7 @@ def gameloop():
     global start_time, opponentHitCounter, won, overheat, shieldHits, playerHit, MoveX, shield_out, shieldOffTime, hitTime2, opponentHitTime2, fps_list
     while True:
         end_time=time.perf_counter()
-        time_delta_time=end_time-start_time    
+        time_delta_time=end_time-start_time 
         start_time=time.perf_counter()
         screen.fill(black)
         if opponentHitCounter >= 1:
@@ -180,7 +180,7 @@ def gameloop():
                     elif oppPos[1] >= MoveY-10-25-5:
                         if shield_out:
                             parryTime2=time.perf_counter()
-                            if parryTime2-parryTime <= 10*time_delta_time: # Old time : 0.2 seconds
+                            if parryTime2-parryTime <= 50*time_delta_time: # Old time : 0.2 seconds
                                 parry_shots.append(oppPos)
                                 opponentShips[op].parried=True
                                 del opponentShips[op].shots[opponentShips[op].shots.index(oppPos)]
