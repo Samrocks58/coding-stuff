@@ -8,6 +8,7 @@ num_defs=0
 
 def find_num_definitions(word):
     global defs, partsOspeech, num_defs, synonymCards
+    num_defs = 0
     content = requests.get('https://www.thesaurus.com/browse/'+ str(word)).content
     soup = BeautifulSoup(content, 'html.parser')
     for sec in soup.find_all('section'):
