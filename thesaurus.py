@@ -55,7 +55,7 @@ old_word = word
 while not (word == 'quit' or word == 'q'):
 
     if find_num_definitions(word) == 1:
-        print(find_definitions(word, 1))
+        print(find_definitions(1))
     elif num_defs > 1:
         print("Which definition of the word do you want?")
         for n in range(len(defs)):
