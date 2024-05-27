@@ -50,7 +50,6 @@ def find_definitions(index):
     return wordList
 
 word = input("Enter a word that you want synonyms of: ")
-word = "bad"
 old_word = word
 while not (word == 'quit' or word == 'q'):
 
