@@ -9,6 +9,8 @@ num_defs=0
 def find_num_definitions(word):
     global defs, partsOspeech, num_defs, synonymCards
     num_defs = 0
+    defs = []
+    synonymCards = []
     content = requests.get('https://www.thesaurus.com/browse/'+ str(word)).content
     soup = BeautifulSoup(content, 'html.parser')
     for sec in soup.find_all('section'):
@@ -35,6 +37,7 @@ def find_num_definitions(word):
                                             partsOspeech.append(POS)
         except Exception:
             pass
+    return num_defs
 
 def find_definitions(index):
     global num_defs, synonymCards
@@ -45,9 +48,15 @@ def find_definitions(index):
     body2 = body.find_all('div')[1]
     for d in body2.find_all('div'):
         if (d.find('p').get_text() == "Strongest matches") or (d.find('p').get_text() == "Strong matches"):
-            ul = d.find('ul')
-            for li in ul.find_all('li'):
-                wordList.append(li.get_text())
+            try:
+                ul = d.find('ul')
+                for li in ul.find_all('li'):
+                    wordList.append(li.get_text())
+            except Exception:
+                for p in d.find_all('p'):
+                    if p.get_text() != "Strongest matches" and p.get_text() != "Strong matches" and p.get_text() != "Weak matches":
+                        for span in p.find_all('span'):
+                            wordList.append(span.get_text())
     return wordList
 
 word = input("Enter a word that you want synonyms of: ")
