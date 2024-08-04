@@ -41,11 +41,3 @@ def getDomainError():
     temp_txt = "\t\t\tNumber of URLS: " + str(counter) + "\n\n" + temp_txt
     
     return temp_txt
-
-    # if not (request.form['token'] == os.environ['SLACK_VERIFICATION_TOKEN']):
-    #     abort(400)
-
-    # return jsonify(
-    #     response_type='in_channel',
-    #     text=''
-    # )
