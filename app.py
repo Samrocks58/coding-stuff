@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "IT WORKS!!"
+    return ("HAHAHAHA!!!!  " * 10 + "\n") * 30
 
 
       
@@ -18,9 +18,9 @@ def getExpiresSoon():
     #         temp_txt += " " + str(line) + "\n"
     #         counter += 1
             
-    temp_txt = "\t\t\tNumber of URLS: " + str(counter) + "\n\n" + temp_txt
+    # temp_txt = "\t\t\tNumber of URLS: " + str(counter) + "\n\n" + temp_txt
     
-    return temp_txt
+    # return temp_txt
     # if not (request.form['token'] == os.environ['SLACK_VERIFICATION_TOKEN']):
     #     abort(400)
 
@@ -33,10 +33,10 @@ def getExpiresSoon():
 def getDomainError():
     counter = 0
     temp_txt = ""
-    for line in txt.split("\n"):
-        if ("Incorrect Domain Configuration" in line):
-            temp_txt += " " + str(line) + "\n"
-            counter += 1
+    # for line in txt.split("\n"):
+    #     if ("Incorrect Domain Configuration" in line):
+    #         temp_txt += " " + str(line) + "\n"
+    #         counter += 1
             
     temp_txt = "\t\t\tNumber of URLS: " + str(counter) + "\n\n" + temp_txt
     
